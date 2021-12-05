@@ -57,7 +57,7 @@ The current version of the GoDataGovGr clients supports data set of the data.gov
   * [Auditors](https://www.data.gov.gr/datasets/elte_auditors/)
   * [Casino Tickets](https://www.data.gov.gr/datasets/eeep_casino_tickets/)
   * [Energy Inspectors](https://www.data.gov.gr/datasets/minenv_inspectors/)
-  * [Realtors](https://www.data.gov.gr/datasets/minenv_inspectors/)
+  * [Realtors](https://www.data.gov.gr/datasets/mindev_realtors/)
   * [Tourist Agencies](https://www.data.gov.gr/datasets/mintour_agencies/)
 * [Crime and Justice](https://data.gov.gr/search/?topic=crime)
   * [Traffic Accidents](https://www.data.gov.gr/datasets/mcp_traffic_accidents/)

@@ -49,7 +49,9 @@ func NewClient(config *DataGovGrConfig) *DataGovGrClient {
 
 // NewDefaultConfig creates and returns a new default DataGovGr config.
 // It accepts the API token and uses predefined values for parameters
-// such as retry count retry wait and max wait time and timeout.
+// such as retry count, retry wait and max wait time, and timeout. The
+// default values are a retry count of three (3), a retry wait time and
+// retry max wait time of five (5) secs, and a timeout of ten (10) secs.
 func NewDefaultConfig(apiToken string) *DataGovGrConfig {
 	return &DataGovGrConfig{
 		apiToken:         apiToken,
@@ -60,58 +62,28 @@ func NewDefaultConfig(apiToken string) *DataGovGrConfig {
 	}
 }
 
-// GetVaccinationData retrieves the Vaccination data from data.gov.gr.
-// The supported query parameters include the start and end dates, as
-// well as the area. Shall query parameters be set, the must be given
-// in an VaccinationQueryParams struct, as defined in the models.
-func (d *DataGovGrClient) GetVaccinationData(
-	queryParams *VaccinationQueryParams) (*[]VaccinationData, error) {
+// GetData retrieves the data for most of the available datasets. It accepts the query
+// parameters (if any), a pointer to an array of appropriate structs (according to the
+// requested dataset) and the URL. It returns an error.
+func (d *DataGovGrClient) GetData(queryParams, data interface{}, url string) error {
 	// Handle Query Params.
-	vaccinationQueryMap, err := formatQueryParams(queryParams)
+	queryMap, err := FormatQueryParams(queryParams)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	var vaccinationData *[]VaccinationData
 	var errorResponse map[string]interface{}
 	resp, err := d.client.R().
-		SetQueryParams(vaccinationQueryMap).
-		SetResult(&vaccinationData).
+		SetQueryParams(queryMap).
+		SetResult(data).
 		SetError(&errorResponse).
-		Get(URL_COVID_VACCINATION)
+		Get(url)
 	if err != nil {
-		return nil, errors.New(fmt.Sprintf("Could not retrieve vaccination data: %s", err))
+		return errors.New(fmt.Sprintf("Could not retrieve requested data: %s", err))
 	} else if resp.StatusCode() != http.StatusOK {
-		return nil, errors.New(fmt.Sprintf("Request failed with status code [%d]: `%s`",
+		return errors.New(fmt.Sprintf("Request failed with status code [%d]: `%s`",
 			resp.StatusCode(), errorResponse["error"].(string)))
 	}
-	return vaccinationData, nil
-}
-
-// GetInternetTraffic retrieves the internet traffic from data.gov.gr.
-// The supported query parameters include the start and end dates. The
-// query parameters must be given in an InternetTrafficQueryParams struct,
-// as defined in the client's models.
-func (d *DataGovGrClient) GetInternetTraffic(
-	queryParams *InternetTrafficQueryParams) (*[]InternetTraffic, error) {
-	// Handle Query Params.
-	internetTrafficQueryMap, err := formatQueryParams(queryParams)
-	if err != nil {
-		return nil, err
-	}
-	var internetTraffic *[]InternetTraffic
-	var errorResponse map[string]interface{}
-	resp, err := d.client.R().
-		SetQueryParams(internetTrafficQueryMap).
-		SetResult(&internetTraffic).
-		SetError(&errorResponse).
-		Get(URL_INTERNET_TRAFFIC)
-	if err != nil {
-		return nil, errors.New(fmt.Sprintf("Could not retrieve internet traffic data: %s", err))
-	} else if resp.StatusCode() != http.StatusOK {
-		return nil, errors.New(fmt.Sprintf("Request failed with status code [%d]: `%s`",
-			resp.StatusCode(), errorResponse["error"].(string)))
-	}
-	return internetTraffic, nil
+	return nil
 }
 
 // GetNumbers performs a request to one of the endpoints that retrieve concern
@@ -132,42 +104,170 @@ func (d *DataGovGrClient) GetNumbers(url string) (*[]NumberData, error) {
 	return &numbers, nil
 }
 
-// GetAccountantNumbers retrieves the accountant numbers from data.gov.gr.
-func (d *DataGovGrClient) GetAccountantNumbers() (*[]NumberData, error) {
-	return d.GetNumbers(URL_ACCOUNTANT_NUMBERS)
+// GetAcademicProfessors retrieves the Academic Professor data from data.gov.gr.
+func (d *DataGovGrClient) GetAcademicProfessors() (*[]AcademicProfessorData, error) {
+	// Define empty auditor data.
+	academicProfessorData := &[]AcademicProfessorData{}
+	// Get vaccination data.
+	err := d.GetData(nil, academicProfessorData, URL_ACADEMIC_PROFESSORS)
+	if err != nil {
+		return nil, err
+	}
+	return academicProfessorData, nil
 }
 
-// GetEnergyInspectorNumbers retrieves the energy inspector numbers from data.gov.gr.
-func (d *DataGovGrClient) GetEnergyInspectorNumbers() (*[]NumberData, error) {
-	return d.GetNumbers(URL_ENERGY_INSPECTOR_NUMBERS)
+// GetAuditors retrieves the Auditor data from data.gov.gr.
+func (d *DataGovGrClient) GetAuditors() (*[]AuditorData, error) {
+	// Define empty auditor data.
+	auditorData := &[]AuditorData{}
+	// Get vaccination data.
+	err := d.GetData(nil, auditorData, URL_AUDITORS)
+	if err != nil {
+		return nil, err
+	}
+	return auditorData, nil
 }
 
-// GetLawyerNumbers retrieves the lawyer numbers from data.gov.gr.
-func (d *DataGovGrClient) GetLawyerNumbers() (*[]NumberData, error) {
-	return d.GetNumbers(URL_LAWYER_NUMBERS)
+// GetCasinoTickets retrieves the Casino Ticket data from data.gov.gr.
+func (d *DataGovGrClient) GetCasinoTickets() (*[]CasinoTicketData, error) {
+	// Define empty casino ticket data.
+	casinoTicketData := &[]CasinoTicketData{}
+	// Get casino ticket data.
+	err := d.GetData(nil, casinoTicketData, URL_CASINO_TICKETS)
+	if err != nil {
+		return nil, err
+	}
+	return casinoTicketData, nil
 }
 
-// GetLawFirmNumbers retrieves the law firm numbers from data.gov.gr.
-func (d *DataGovGrClient) GetLawFirmNumbers() (*[]NumberData, error) {
-	return d.GetNumbers(URL_LAW_FIRM_NUMBERS)
+// GetCrimes retrieves the Crime Statistic data from data.gov.gr.
+func (d *DataGovGrClient) GetCrimes() (*[]CrimeStatData, error) {
+	// Define empty crime stat data.
+	crimeStatData := &[]CrimeStatData{}
+	// Get casino ticket data.
+	err := d.GetData(nil, crimeStatData, URL_CRIMES)
+	if err != nil {
+		return nil, err
+	}
+	return crimeStatData, nil
 }
 
-// GetPharmacyNumbers retrieves the pharmacy numbers from data.gov.gr.
-func (d *DataGovGrClient) GetPharmacyNumbers() (*[]NumberData, error) {
-	return d.GetNumbers(URL_PHARMACY_NUMBERS)
+// GetEudoxusApplications retrieves the Eudoxus Application data from data.gov.gr.
+func (d *DataGovGrClient) GetEudoxusApplications() (*[]EudoxusApplicationData, error) {
+	// Define empty Eudoxus application data.
+	eudoxusApplicationData := &[]EudoxusApplicationData{}
+	// Get Eudoxus application data.
+	err := d.GetData(nil, eudoxusApplicationData, URL_EUDOXUS_APPLICATIONS)
+	if err != nil {
+		return nil, err
+	}
+	return eudoxusApplicationData, nil
 }
 
-// GetPharmacistNumbers retrieves the pharmacist numbers from data.gov.gr.
-func (d *DataGovGrClient) GetPharmacistNumbers() (*[]NumberData, error) {
-	return d.GetNumbers(URL_PHARMACIST_NUMBERS)
+// GetFinancialCrimes retrieves the Financial Crime Statistics from data.gov.gr.
+func (d *DataGovGrClient) GetFinancialCrimes() (*[]FinancialCrimeData, error) {
+	// Define empty financial crime data.
+	financialCrimeData := &[]FinancialCrimeData{}
+	// Get Eudoxus application data.
+	err := d.GetData(nil, financialCrimeData, URL_FINANCIAL_CRIMES)
+	if err != nil {
+		return nil, err
+	}
+	return financialCrimeData, nil
 }
 
-// GetRealtorNumbers retrieves the realtor numbers from data.gov.gr.
-func (d *DataGovGrClient) GetRealtorNumbers() (*[]NumberData, error) {
-	return d.GetNumbers(URL_REALTOR_NUMBERS)
+// GetInternetTraffic retrieves the Internet Traffic data from data.gov.gr.
+// The supported query parameters include the start and end dates. The query
+// parameters must be given in an InternetTrafficQueryParams struct, as
+// defined in the client's models.
+func (d *DataGovGrClient) GetInternetTraffic(
+	queryParams *InternetTrafficQueryParams) (*[]InternetTrafficData, error) {
+	// Define empty vaccination data.
+	internetTrafficData := &[]InternetTrafficData{}
+	// Get vaccination data.
+	err := d.GetData(queryParams, internetTrafficData, URL_INTERNET_TRAFFIC)
+	if err != nil {
+		return nil, err
+	}
+	return internetTrafficData, nil
 }
 
-// GetTouristAgencyNumbers retrieves the tourist agency numbers from data.gov.gr.
-func (d *DataGovGrClient) GetTouristAgencyNumbers() (*[]NumberData, error) {
-	return d.GetNumbers(URL_TOURIST_AGENCY_NUMBERS)
+// GetTrafficAccidents retrieves the Traffic Accident data from data.gov.gr.
+func (d *DataGovGrClient) GetTrafficAccidents(queryParams *InternetTrafficQueryParams) (*[]TrafficAccidentData, error) {
+	// Define empty traffic accident data.
+	trafficAccidentData := &[]TrafficAccidentData{}
+	// Get traffic accident data.
+	err := d.GetData(queryParams, trafficAccidentData, URL_TRAFFIC_ACCIDENTS)
+	if err != nil {
+		return nil, err
+	}
+	return trafficAccidentData, nil
+}
+
+// GetTrafficViolations retrieves the Traffic Violation data from data.gov.gr.
+func (d *DataGovGrClient) GetTrafficViolations(queryParams *InternetTrafficQueryParams) (*[]TrafficViolationData, error) {
+	// Define empty traffic accident data.
+	trafficViolationData := &[]TrafficViolationData{}
+	// Get traffic accident data.
+	err := d.GetData(queryParams, trafficViolationData, URL_TRAFFIC_VIOLATIONS)
+	if err != nil {
+		return nil, err
+	}
+	return trafficViolationData, nil
+}
+
+// GetVaccinations retrieves the Vaccination data from data.gov.gr.
+// The supported query parameters include the start and end dates, as
+// well as the area. Shall query parameters be set, the must be given
+// in an VaccinationQueryParams struct, as defined in the models.
+func (d *DataGovGrClient) GetVaccinations(
+	queryParams *VaccinationQueryParams) (*[]VaccinationData, error) {
+	// Define empty vaccination data.
+	vaccinationData := &[]VaccinationData{}
+	// Get vaccination data.
+	err := d.GetData(queryParams, vaccinationData, URL_COVID_VACCINATION)
+	if err != nil {
+		return nil, err
+	}
+	return vaccinationData, nil
+}
+
+// GetAccountants retrieves the accountant numbers from data.gov.gr.
+func (d *DataGovGrClient) GetAccountants() (*[]NumberData, error) {
+	return d.GetNumbers(URL_ACCOUNTANTS)
+}
+
+// GetEnergyInspectors retrieves the energy inspector numbers from data.gov.gr.
+func (d *DataGovGrClient) GetEnergyInspectors() (*[]NumberData, error) {
+	return d.GetNumbers(URL_ENERGY_INSPECTORS)
+}
+
+// GetLawyers retrieves the lawyer numbers from data.gov.gr.
+func (d *DataGovGrClient) GetLawyers() (*[]NumberData, error) {
+	return d.GetNumbers(URL_LAWYERS)
+}
+
+// GetLawFirms retrieves the law firm numbers from data.gov.gr.
+func (d *DataGovGrClient) GetLawFirms() (*[]NumberData, error) {
+	return d.GetNumbers(URL_LAW_FIRMS)
+}
+
+// GetPharmacies retrieves the pharmacy numbers from data.gov.gr.
+func (d *DataGovGrClient) GetPharmacies() (*[]NumberData, error) {
+	return d.GetNumbers(URL_PHARMACIES)
+}
+
+// GetPharmacists retrieves the pharmacist numbers from data.gov.gr.
+func (d *DataGovGrClient) GetPharmacists() (*[]NumberData, error) {
+	return d.GetNumbers(URL_PHARMACISTS)
+}
+
+// GetRealtors retrieves the realtor numbers from data.gov.gr.
+func (d *DataGovGrClient) GetRealtors() (*[]NumberData, error) {
+	return d.GetNumbers(URL_REALTORS)
+}
+
+// GetTouristAgencies retrieves the tourist agency numbers from data.gov.gr.
+func (d *DataGovGrClient) GetTouristAgencies() (*[]NumberData, error) {
+	return d.GetNumbers(URL_TOURIST_AGENCIES)
 }

@@ -237,6 +237,16 @@ func (d *DataGovGrClient) GetAccountants() (*[]NumberData, error) {
 	return d.GetNumbers(URL_ACCOUNTANTS)
 }
 
+// GetDendists retrieves the dendist numbers from data.gov.gr.
+func (d *DataGovGrClient) GetDendists() (*[]NumberData, error) {
+	return d.GetNumbers(URL_DENDISTS)
+}
+
+// GetDoctors retrieves the doctor numbers from data.gov.gr.
+func (d *DataGovGrClient) GetDoctors() (*[]NumberData, error) {
+	return d.GetNumbers(URL_DOCTORS)
+}
+
 // GetEnergyInspectors retrieves the energy inspector numbers from data.gov.gr.
 func (d *DataGovGrClient) GetEnergyInspectors() (*[]NumberData, error) {
 	return d.GetNumbers(URL_ENERGY_INSPECTORS)

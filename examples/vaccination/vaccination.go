@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -19,7 +18,7 @@ func main() {
 	client := godatagovgr.NewClient(godatagovgr.NewDefaultConfig(apiToken))
 
 	// Perform request.
-	vaccinationData, err := client.GetVaccinationData(
+	vaccinationData, err := client.GetVaccinations(
 		&godatagovgr.VaccinationQueryParams{
 			DateFrom: "2021-01-01",
 			DateTo:   "2021-11-30",
@@ -27,12 +26,12 @@ func main() {
 		},
 	)
 	if err != nil {
-		fmt.Printf("An error occurred while fetching vaccination data: %s", err)
+		log.Panicf("An error occurred while fetching vaccination data: %s", err)
 	}
 
 	// Print vaccination data.
 	for _, vaccinationDay := range *vaccinationData {
-		fmt.Printf("On %s, %d vaccinations were conducted in regional unit %q.\n",
+		log.Printf("On %s, %d vaccinations were conducted in regional unit %q.",
 			vaccinationDay.ReferenceDate, vaccinationDay.DayTotal, vaccinationDay.Area)
 	}
 }

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -19,14 +18,15 @@ func main() {
 	client := godatagovgr.NewClient(godatagovgr.NewDefaultConfig(apiToken))
 
 	// Perform request.
-	numbers, err := client.GetAccountants()
+	trafficAccidents, err := client.GetTrafficAccidents()
 	if err != nil {
-		fmt.Printf("An error occurred while fetching accountant numbers: %s", err)
+		log.Panicf("An error occurred while fetching traffic accident data: %s", err)
 	}
 
-	// Display accountant data.
-	for _, accRecord := range *numbers {
-		fmt.Printf("In %s of year %d there were %d accountants, with %d new entries and %d exits.\n",
-			accRecord.Quarter, accRecord.Year, accRecord.Active, accRecord.Entrants, accRecord.Exits)
+	// Print traffic accident data.
+	for _, trafficAccident := range *trafficAccidents {
+		log.Printf("In %d, %d serious accidents and %d deadly were recorded in %s.",
+			trafficAccident.Year, trafficAccident.SeriousAccidents,
+			trafficAccident.DeadlyAccidents, trafficAccident.Jurisdiction)
 	}
 }

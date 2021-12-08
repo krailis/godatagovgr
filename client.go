@@ -193,11 +193,11 @@ func (d *DataGovGrClient) GetInternetTraffic(
 }
 
 // GetTrafficAccidents retrieves the Traffic Accident data from data.gov.gr.
-func (d *DataGovGrClient) GetTrafficAccidents(queryParams *InternetTrafficQueryParams) (*[]TrafficAccidentData, error) {
+func (d *DataGovGrClient) GetTrafficAccidents() (*[]TrafficAccidentData, error) {
 	// Define empty traffic accident data.
 	trafficAccidentData := &[]TrafficAccidentData{}
 	// Get traffic accident data.
-	err := d.GetData(queryParams, trafficAccidentData, URL_TRAFFIC_ACCIDENTS)
+	err := d.GetData(nil, trafficAccidentData, URL_TRAFFIC_ACCIDENTS)
 	if err != nil {
 		return nil, err
 	}
@@ -205,11 +205,11 @@ func (d *DataGovGrClient) GetTrafficAccidents(queryParams *InternetTrafficQueryP
 }
 
 // GetTrafficViolations retrieves the Traffic Violation data from data.gov.gr.
-func (d *DataGovGrClient) GetTrafficViolations(queryParams *InternetTrafficQueryParams) (*[]TrafficViolationData, error) {
+func (d *DataGovGrClient) GetTrafficViolations() (*[]TrafficViolationData, error) {
 	// Define empty traffic accident data.
 	trafficViolationData := &[]TrafficViolationData{}
 	// Get traffic accident data.
-	err := d.GetData(queryParams, trafficViolationData, URL_TRAFFIC_VIOLATIONS)
+	err := d.GetData(nil, trafficViolationData, URL_TRAFFIC_VIOLATIONS)
 	if err != nil {
 		return nil, err
 	}

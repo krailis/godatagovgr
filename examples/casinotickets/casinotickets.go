@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -19,14 +18,14 @@ func main() {
 	client := godatagovgr.NewClient(godatagovgr.NewDefaultConfig(apiToken))
 
 	// Perform request.
-	numbers, err := client.GetAccountants()
+	casinoTickets, err := client.GetCasinoTickets()
 	if err != nil {
-		fmt.Printf("An error occurred while fetching accountant numbers: %s", err)
+		log.Panicf("An error occurred while fetching casino ticker data: %s", err)
 	}
 
-	// Display accountant data.
-	for _, accRecord := range *numbers {
-		fmt.Printf("In %s of year %d there were %d accountants, with %d new entries and %d exits.\n",
-			accRecord.Quarter, accRecord.Year, accRecord.Active, accRecord.Entrants, accRecord.Exits)
+	// Print casino ticket data.
+	for _, casinoTicketYear := range *casinoTickets {
+		log.Printf("In %d, %d casino tickets were sold.",
+			casinoTicketYear.Year, casinoTicketYear.Tickets)
 	}
 }

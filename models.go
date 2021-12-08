@@ -1,5 +1,7 @@
 package godatagovgr
 
+import "encoding/json"
+
 // Number Data struct definition.
 //
 // This struct applies to multiple series of data:
@@ -27,6 +29,19 @@ type NumberData struct {
 	Exits    int    `json:"exits,omitempty"`
 }
 
+// Academic Professor (DEP) data.
+// See more: https://www.data.gov.gr/datasets/minedu_dep/
+type AcademicProfessorData struct {
+	Year                int    `json:"year,omitempty"`
+	Institution         string `json:"institution,omitempty"`
+	FullProfessors      int    `json:"full_professors,omitempty"`
+	AssociateProfessors int    `json:"associate_professors,omitempty"`
+	AssistantProfessors int    `json:"assistant_professors,omitempty"`
+	Lecturers           int    `json:"lecturers,omitempty"`
+	PracticeProfessors  int    `json:"practice_professors,omitempty"`
+	PracticeLecturers   int    `json:"practice_lecturers,omitempty"`
+}
+
 // Auditors.
 // See more: https://www.data.gov.gr/datasets/elte_auditors/
 type AuditorData struct {
@@ -42,7 +57,7 @@ type CasinoTicketData struct {
 }
 
 // Crime Statistics.
-// See more: https://data.gov.gr/api/v1/query/mcp_crime
+// See more: https://data.gov.gr/datasets/mcp_crime
 type CrimeStatData struct {
 	Year              int    `json:"year,omitempty"`
 	Crime             string `json:"crime,omitempty"`
@@ -51,19 +66,6 @@ type CrimeStatData struct {
 	Solved            int    `json:"solved,omitempty"`
 	DomesticCriminals int    `json:"domestic_criminals,omitempty"`
 	ForeignCriminals  int    `json:"foreign_criminals,omitempty"`
-}
-
-// Academic Professor (DEP) data.
-// See more: https://www.data.gov.gr/datasets/minedu_dep/
-type AcademicProfessorData struct {
-	Year                int    `json:"year,omitempty"`
-	Institution         string `json:"institution,omitempty"`
-	FullProfessors      int    `json:"full_professors,omitempty"`
-	AssociateProfessors int    `json:"associate_professors,omitempty"`
-	AssistantProfessors int    `json:"assistant_professors,omitempty"`
-	Lecturers           int    `json:"lecturers,omitempty"`
-	PracticeProfessors  int    `json:"practice_professors,omitempty"`
-	PracticeLecturers   int    `json:"practice_lecturers,omitempty"`
 }
 
 // Eudoxus Applications & Deliveries.
@@ -87,7 +89,7 @@ type FinancialCrimeData struct {
 
 // Hellenic Coast Guard Incidents.
 // See more: https://www.data.gov.gr/datasets/hcg_incidents/
-type HellenicCoastGuardIncidents struct {
+type HellenicCoastGuardIncidentData struct {
 	Year          int    `json:"year,omitempty"`
 	Incident      string `json:"incident,omitempty"`
 	Domestic      int    `json:"domestic,omitempty"`
@@ -96,18 +98,12 @@ type HellenicCoastGuardIncidents struct {
 
 // Internet Traffic.
 // See more: https://data.gov.gr/datasets/internet_traffic/
-type InternetTraffic struct {
+type InternetTrafficData struct {
 	Date       string `json:"date"`
 	AverageIn  int    `json:"avg_in"`
 	AverageOut int    `json:"avg_out"`
 	MaxIn      int    `json:"max_in"`
 	MaxOut     int    `json:"max_out"`
-}
-
-// Internet Traffic Query Params.
-type InternetTrafficQueryParams struct {
-	DateFrom string `json:"date_from,omitempty"`
-	DateTo   string `json:"date_to,omitempty"`
 }
 
 // Internship Data.
@@ -134,7 +130,7 @@ type StudentSchoolData struct {
 }
 
 // Traffic Accidents.
-// See more: https://data.gov.gr/api/v1/query/mcp_traffic_accidents
+// See more: https://data.gov.gr/datasets/mcp_traffic_accidents
 type TrafficAccidentData struct {
 	Year             int    `json:"year,omitempty"`
 	Jurisdiction     string `json:"jurisdiction,omitempty"`
@@ -152,10 +148,6 @@ type TrafficViolationData struct {
 	Year      int    `json:"year,omitempty"`
 	Violation string `json:"violation,omitempty"`
 	Count     int    `json:"count,omitempty"`
-}
-
-// Traffic Violation Query Params.
-type TrafficViolationQueryParams struct {
 }
 
 // Vaccinations.
@@ -176,9 +168,31 @@ type VaccinationData struct {
 	TotalVaccinations    int    `json:"totalvaccinations,omitempty"`
 }
 
-// Vaccination Query Parameters struct definition.
-type VaccinationQueryParams struct {
-	DateFrom string `json:"date_from,omitempty"`
-	DateTo   string `json:"date_to,omitempty"`
-	Area     string `json:"area,omitempty"`
+// Stringable interface definition.
+type Stringable interface {
+	String() string
 }
+
+// structToJSONString returns a struct formatted into a pretty JSON string.
+func structToJSONString(t interface{}) string {
+	json, err := json.MarshalIndent(t, "", "\t")
+	if err != nil {
+		return ""
+	}
+	return string(json)
+}
+
+// fmt.GoStringer interface implementations.
+func (i *NumberData) String() string                     { return structToJSONString(i) }
+func (i *AcademicProfessorData) String() string          { return structToJSONString(i) }
+func (i *AuditorData) String() string                    { return structToJSONString(i) }
+func (i *CrimeStatData) String() string                  { return structToJSONString(i) }
+func (i *EudoxusApplicationData) String() string         { return structToJSONString(i) }
+func (i *FinancialCrimeData) String() string             { return structToJSONString(i) }
+func (i *HellenicCoastGuardIncidentData) String() string { return structToJSONString(i) }
+func (i *InternetTrafficData) String() string            { return structToJSONString(i) }
+func (i *InternshipData) String() string                 { return structToJSONString(i) }
+func (i *StudentSchoolData) String() string              { return structToJSONString(i) }
+func (i *TrafficAccidentData) String() string            { return structToJSONString(i) }
+func (i *TrafficViolationData) String() string           { return structToJSONString(i) }
+func (i *VaccinationData) String() string                { return structToJSONString(i) }

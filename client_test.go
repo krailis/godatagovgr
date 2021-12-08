@@ -20,20 +20,20 @@ func TestMain(m *testing.M) {
 }
 
 // TestVaccinationData tests the retrieval of all the vaccination data.
-func TestGetVaccinationData(t *testing.T) {
+func TestGetVaccinations(t *testing.T) {
 	// Perform a request without query params.
-	_, err := dataGovGrClient.GetVaccinationData(nil)
+	_, err := dataGovGrClient.GetVaccinations(nil)
 	if err != nil {
 		t.Errorf("Expected no error, got %v.", err)
 	}
 }
 
 // TestVaccinationDataByArea tests the retrieval of vaccination data by area.
-func TestVaccinationDataByArea(t *testing.T) {
+func TestGetVaccinationsByArea(t *testing.T) {
 	// Set area.
 	area := "ΡΕΘΥΜΝΟΥ"
 	// Perform a request, filtering by area.
-	vaccinationDays, err := dataGovGrClient.GetVaccinationData(
+	vaccinationDays, err := dataGovGrClient.GetVaccinations(
 		&VaccinationQueryParams{Area: area},
 	)
 	if err != nil {
@@ -48,19 +48,52 @@ func TestVaccinationDataByArea(t *testing.T) {
 	}
 }
 
-// TestAccountantNumbers tests the retrieval of the accountant numbers.
-func TestAccountantNumbers(t *testing.T) {
+// TestGetAccountants tests the retrieval of the accountant numbers.
+func TestGetAccountants(t *testing.T) {
 	// Perform a request without query params.
-	_, err := dataGovGrClient.GetAccountantNumbers()
+	_, err := dataGovGrClient.GetAccountants()
 	if err != nil {
 		t.Errorf("Expected no error, got %v.", err)
 	}
 }
 
-// TestEnergyInspectorNumbers tests the retrieval of the energy inspector numbers.
-func TestEnergyInspectorNumbers(t *testing.T) {
+// TestGetAuditors tests the retrieval of the auditor numbers.
+func TestGetAuditors(t *testing.T) {
 	// Perform a request without query params.
-	_, err := dataGovGrClient.GetEnergyInspectorNumbers()
+	_, err := dataGovGrClient.GetAuditors()
+	if err != nil {
+		t.Errorf("Expected no error, got %v.", err)
+	}
+}
+
+// TestEnergyInspectors tests the retrieval of the energy inspector numbers.
+func TestGetEnergyInspectors(t *testing.T) {
+	// Perform a request without query params.
+	_, err := dataGovGrClient.GetEnergyInspectors()
+	if err != nil {
+		t.Errorf("Expected no error, got %v.", err)
+	}
+}
+
+// TestGetInternetTraffic tests the retrieval of internet traffic data.
+func TestGetInternetTraffic(t *testing.T) {
+	// Perform a request without query params.
+	_, err := dataGovGrClient.GetInternetTraffic(nil)
+	if err != nil {
+		t.Errorf("Expected no error, got %v.", err)
+	}
+}
+
+// TestGetInternetTrafficByDates tests the retrieval of internet
+// traffic data within a specified time frame.
+func TestGetInternetTrafficByDates(t *testing.T) {
+	// Perform a request without query params.
+	_, err := dataGovGrClient.GetInternetTraffic(
+		&InternetTrafficQueryParams{
+			DateFrom: "2021-01-01",
+			DateTo:   "2021-11-30",
+		},
+	)
 	if err != nil {
 		t.Errorf("Expected no error, got %v.", err)
 	}
@@ -69,52 +102,70 @@ func TestEnergyInspectorNumbers(t *testing.T) {
 // TestLawyerNumbers tests the retrieval of the lawyer numbers.
 func TestLawyerNumbers(t *testing.T) {
 	// Perform a request without query params.
-	_, err := dataGovGrClient.GetLawyerNumbers()
+	_, err := dataGovGrClient.GetLawyers()
 	if err != nil {
 		t.Errorf("Expected no error, got %v.", err)
 	}
 }
 
-// TestLawFirmNumbers tests the retrieval of the law firm numbers.
-func TestLawFirmNumbers(t *testing.T) {
+// TestGetLawFirmNumbers tests the retrieval of the law firm numbers.
+func TestGetLawFirms(t *testing.T) {
 	// Perform a request without query params.
-	_, err := dataGovGrClient.GetLawFirmNumbers()
+	_, err := dataGovGrClient.GetLawFirms()
 	if err != nil {
 		t.Errorf("Expected no error, got %v.", err)
 	}
 }
 
-// TestPharmacyNumbers tests the retrieval of the pharmacy numbers.
-func TestPharmacyNumbers(t *testing.T) {
+// TestGetPharmacies tests the retrieval of the pharmacy numbers.
+func TestGetPharmacies(t *testing.T) {
 	// Perform a request without query params.
-	_, err := dataGovGrClient.GetPharmacyNumbers()
+	_, err := dataGovGrClient.GetPharmacies()
 	if err != nil {
 		t.Errorf("Expected no error, got %v.", err)
 	}
 }
 
-// TestPharmacistNumbers tests the retrieval of the pharmacist numbers.
-func TestPharmacistNumbers(t *testing.T) {
+// TestGetPharmacists tests the retrieval of the pharmacist numbers.
+func TestPharmacists(t *testing.T) {
 	// Perform a request without query params.
-	_, err := dataGovGrClient.GetPharmacistNumbers()
+	_, err := dataGovGrClient.GetPharmacists()
 	if err != nil {
 		t.Errorf("Expected no error, got %v.", err)
 	}
 }
 
-// TestRealtorNumbers tests the retrieval of the realtor numbers.
-func TestRealtorNumbers(t *testing.T) {
+// TestGetRealtors tests the retrieval of the realtor numbers.
+func TestGetRealtors(t *testing.T) {
 	// Perform a request without query params.
-	_, err := dataGovGrClient.GetRealtorNumbers()
+	_, err := dataGovGrClient.GetRealtors()
 	if err != nil {
 		t.Errorf("Expected no error, got %v.", err)
 	}
 }
 
-// TestTouristAgencyNumbers tests the retrieval of the tourist agency numbers.
-func TestTouristAgencyNumbers(t *testing.T) {
+// TestGetTouristAgencies tests the retrieval of the tourist agency numbers.
+func TestTouristAgencies(t *testing.T) {
 	// Perform a request without query params.
-	_, err := dataGovGrClient.GetTouristAgencyNumbers()
+	_, err := dataGovGrClient.GetTouristAgencies()
+	if err != nil {
+		t.Errorf("Expected no error, got %v.", err)
+	}
+}
+
+// TestGetTrafficAccidents tests the retrieval of traffic accident data.
+func TestGetTrafficAccidents(t *testing.T) {
+	// Perform a request without query params.
+	_, err := dataGovGrClient.GetTrafficAccidents()
+	if err != nil {
+		t.Errorf("Expected no error, got %v.", err)
+	}
+}
+
+// TestGetTrafficViolations tests the retrieval of traffic violation data.
+func TestGetTrafficViolations(t *testing.T) {
+	// Perform a request without query params.
+	_, err := dataGovGrClient.GetTrafficViolations()
 	if err != nil {
 		t.Errorf("Expected no error, got %v.", err)
 	}

@@ -6,9 +6,22 @@ import (
 	"fmt"
 )
 
-// formatQuery params formats incoming query parameters according to the given
+// Internet Traffic Query Params.
+type InternetTrafficQueryParams struct {
+	DateFrom string `json:"date_from,omitempty"`
+	DateTo   string `json:"date_to,omitempty"`
+}
+
+// Vaccination Query Parameters struct definition.
+type VaccinationQueryParams struct {
+	DateFrom string `json:"date_from,omitempty"`
+	DateTo   string `json:"date_to,omitempty"`
+	Area     string `json:"area,omitempty"`
+}
+
+// FormatQuery params formats incoming query parameters according to the given
 // type and returns a map of query parameters to use with the request.
-func formatQueryParams(queryParams interface{}) (map[string]string, error) {
+func FormatQueryParams(queryParams interface{}) (map[string]string, error) {
 	if queryParams == nil {
 		return map[string]string{}, nil
 	}

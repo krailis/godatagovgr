@@ -1,4 +1,5 @@
 [![CI](https://github.com/krailis/godatagovgr/actions/workflows/ci.yml/badge.svg)](https://github.com/krailis/godatagovgr/actions/workflows/ci.yml?query=branch%3Amain)
+[![Go Report Card](https://goreportcard.com/badge/github.com/krailis/godatagovgr)](https://goreportcard.com/report/github.com/krailis/godatagovgr)
 [![GoDoc](https://pkg.go.dev/badge/github.com/krailis/godatagovgr?utm_source=godoc)](https://pkg.go.dev/github.com/krailis/godatagovgr)
 [![LICENSE](https://img.shields.io/github/license/krailis/godatagovgr.svg)](https://github.com/krailis/godatagovgr/blob/main/LICENSE)
 

@@ -1,3 +1,7 @@
+[![CI](https://github.com/krailis/godatagovgr/actions/workflows/ci.yml/badge.svg)](https://github.com/krailis/godatagovgr/actions/workflows/ci.yml?query=branch%3Amain)
+[![GoDoc](https://pkg.go.dev/badge/github.com/krailis/godatagovgr?utm_source=godoc)](https://pkg.go.dev/github.com/krailis/godatagovgr)
+[![LICENSE](https://img.shields.io/github/license/krailis/godatagovgr.svg)](https://github.com/krailis/godatagovgr/blob/main/LICENSE)
+
 # GoDataGovGr
 
 GoDataGovGr is a Go client for the API offered by the Greek Government, served at https://data.gov.gr. It utilizes the [resty](https://github.com/go-resty/resty) client library.

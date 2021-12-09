@@ -116,6 +116,11 @@ func (d *DataGovGrClient) GetAcademicProfessors() (*[]AcademicProfessorData, err
 	return academicProfessorData, nil
 }
 
+// GetAccountants retrieves the accountant numbers from data.gov.gr.
+func (d *DataGovGrClient) GetAccountants() (*[]NumberData, error) {
+	return d.GetNumbers(URL_ACCOUNTANTS)
+}
+
 // GetAuditors retrieves the Auditor data from data.gov.gr.
 func (d *DataGovGrClient) GetAuditors() (*[]AuditorData, error) {
 	// Define empty auditor data.
@@ -150,6 +155,21 @@ func (d *DataGovGrClient) GetCrimes() (*[]CrimeStatData, error) {
 		return nil, err
 	}
 	return crimeStatData, nil
+}
+
+// GetDendists retrieves the dendist numbers from data.gov.gr.
+func (d *DataGovGrClient) GetDendists() (*[]NumberData, error) {
+	return d.GetNumbers(URL_DENDISTS)
+}
+
+// GetDoctors retrieves the doctor numbers from data.gov.gr.
+func (d *DataGovGrClient) GetDoctors() (*[]NumberData, error) {
+	return d.GetNumbers(URL_DOCTORS)
+}
+
+// GetEnergyInspectors retrieves the energy inspector numbers from data.gov.gr.
+func (d *DataGovGrClient) GetEnergyInspectors() (*[]NumberData, error) {
+	return d.GetNumbers(URL_ENERGY_INSPECTORS)
 }
 
 // GetEudoxusApplications retrieves the Eudoxus Application data from data.gov.gr.
@@ -192,6 +212,48 @@ func (d *DataGovGrClient) GetInternetTraffic(
 	return internetTrafficData, nil
 }
 
+// GetHCGIncidents retrieves the Hellenic Coast Guard Incident data from data.gov.gr.
+func (d *DataGovGrClient) GetHCGIncidents() (*[]HellenicCoastGuardIncidentData, error) {
+	// Define empty HCG incident data.
+	HCGIncidentData := &[]HellenicCoastGuardIncidentData{}
+	// Get HCG incident data.
+	err := d.GetData(nil, HCGIncidentData, URL_TRAFFIC_ACCIDENTS)
+	if err != nil {
+		return nil, err
+	}
+	return HCGIncidentData, nil
+}
+
+// GetLawyers retrieves the lawyer numbers from data.gov.gr.
+func (d *DataGovGrClient) GetLawyers() (*[]NumberData, error) {
+	return d.GetNumbers(URL_LAWYERS)
+}
+
+// GetLawFirms retrieves the law firm numbers from data.gov.gr.
+func (d *DataGovGrClient) GetLawFirms() (*[]NumberData, error) {
+	return d.GetNumbers(URL_LAW_FIRMS)
+}
+
+// GetPharmacies retrieves the pharmacy numbers from data.gov.gr.
+func (d *DataGovGrClient) GetPharmacies() (*[]NumberData, error) {
+	return d.GetNumbers(URL_PHARMACIES)
+}
+
+// GetPharmacists retrieves the pharmacist numbers from data.gov.gr.
+func (d *DataGovGrClient) GetPharmacists() (*[]NumberData, error) {
+	return d.GetNumbers(URL_PHARMACISTS)
+}
+
+// GetRealtors retrieves the realtor numbers from data.gov.gr.
+func (d *DataGovGrClient) GetRealtors() (*[]NumberData, error) {
+	return d.GetNumbers(URL_REALTORS)
+}
+
+// GetTouristAgencies retrieves the tourist agency numbers from data.gov.gr.
+func (d *DataGovGrClient) GetTouristAgencies() (*[]NumberData, error) {
+	return d.GetNumbers(URL_TOURIST_AGENCIES)
+}
+
 // GetTrafficAccidents retrieves the Traffic Accident data from data.gov.gr.
 func (d *DataGovGrClient) GetTrafficAccidents() (*[]TrafficAccidentData, error) {
 	// Define empty traffic accident data.
@@ -230,54 +292,4 @@ func (d *DataGovGrClient) GetVaccinations(
 		return nil, err
 	}
 	return vaccinationData, nil
-}
-
-// GetAccountants retrieves the accountant numbers from data.gov.gr.
-func (d *DataGovGrClient) GetAccountants() (*[]NumberData, error) {
-	return d.GetNumbers(URL_ACCOUNTANTS)
-}
-
-// GetDendists retrieves the dendist numbers from data.gov.gr.
-func (d *DataGovGrClient) GetDendists() (*[]NumberData, error) {
-	return d.GetNumbers(URL_DENDISTS)
-}
-
-// GetDoctors retrieves the doctor numbers from data.gov.gr.
-func (d *DataGovGrClient) GetDoctors() (*[]NumberData, error) {
-	return d.GetNumbers(URL_DOCTORS)
-}
-
-// GetEnergyInspectors retrieves the energy inspector numbers from data.gov.gr.
-func (d *DataGovGrClient) GetEnergyInspectors() (*[]NumberData, error) {
-	return d.GetNumbers(URL_ENERGY_INSPECTORS)
-}
-
-// GetLawyers retrieves the lawyer numbers from data.gov.gr.
-func (d *DataGovGrClient) GetLawyers() (*[]NumberData, error) {
-	return d.GetNumbers(URL_LAWYERS)
-}
-
-// GetLawFirms retrieves the law firm numbers from data.gov.gr.
-func (d *DataGovGrClient) GetLawFirms() (*[]NumberData, error) {
-	return d.GetNumbers(URL_LAW_FIRMS)
-}
-
-// GetPharmacies retrieves the pharmacy numbers from data.gov.gr.
-func (d *DataGovGrClient) GetPharmacies() (*[]NumberData, error) {
-	return d.GetNumbers(URL_PHARMACIES)
-}
-
-// GetPharmacists retrieves the pharmacist numbers from data.gov.gr.
-func (d *DataGovGrClient) GetPharmacists() (*[]NumberData, error) {
-	return d.GetNumbers(URL_PHARMACISTS)
-}
-
-// GetRealtors retrieves the realtor numbers from data.gov.gr.
-func (d *DataGovGrClient) GetRealtors() (*[]NumberData, error) {
-	return d.GetNumbers(URL_REALTORS)
-}
-
-// GetTouristAgencies retrieves the tourist agency numbers from data.gov.gr.
-func (d *DataGovGrClient) GetTouristAgencies() (*[]NumberData, error) {
-	return d.GetNumbers(URL_TOURIST_AGENCIES)
 }

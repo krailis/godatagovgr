@@ -2,33 +2,6 @@ package godatagovgr
 
 import "encoding/json"
 
-// Number Data struct definition.
-//
-// This struct applies to multiple series of data:
-// - Accountants.
-//   See more: https://www.data.gov.gr/datasets/oee_accountants/
-// - Energy Inspector numbers.
-//   See more: https://www.data.gov.gr/datasets/minenv_inspectors/
-// - Lawyer numbers.
-//   See more: https://www.data.gov.gr/datasets/minjust_lawyers/
-// - Law firm numbers.
-//   See more: https://www.data.gov.gr/datasets/minjust_law_firms/
-// - Pharmacy numbers.
-//   See more: https://data.gov.gr/datasets/minhealth_pharmacies/
-// - Pharmacist numbers.
-//   See more: https://data.gov.gr/datasets/minhealth_pharmacists/
-// - Realtors.
-//   See more: https://www.data.gov.gr/datasets/mindev_realtors/
-// - Tourist Agencies.
-//   See more: https://www.data.gov.gr/datasets/mintour_agencies/
-type NumberData struct {
-	Year     int    `json:"year,omitempty"`
-	Quarter  string `json:"quarter,omitempty"`
-	Active   int    `json:"active,omitempty"`
-	Entrants int    `json:"entrants,omitempty"`
-	Exits    int    `json:"exits,omitempty"`
-}
-
 // Academic Professor (DEP) data.
 // See more: https://www.data.gov.gr/datasets/minedu_dep/
 type AcademicProfessorData struct {
@@ -99,11 +72,11 @@ type HellenicCoastGuardIncidentData struct {
 // Internet Traffic.
 // See more: https://data.gov.gr/datasets/internet_traffic/
 type InternetTrafficData struct {
-	Date       string `json:"date"`
-	AverageIn  int    `json:"avg_in"`
-	AverageOut int    `json:"avg_out"`
-	MaxIn      int    `json:"max_in"`
-	MaxOut     int    `json:"max_out"`
+	Date       string `json:"date,omitempty"`
+	AverageIn  int    `json:"avg_in,omitempty"`
+	AverageOut int    `json:"avg_out,omitempty"`
+	MaxIn      int    `json:"max_in,omitempty"`
+	MaxOut     int    `json:"max_out,omitempty"`
 }
 
 // Internship Data.
@@ -114,6 +87,46 @@ type InternshipData struct {
 	PrivateSector       int    `json:"private_sector,omitempty"`
 	PublicSector        int    `json:"public_sector,omitempty"`
 	NonGovOrganizations int    `json:"ngo,omitempty"`
+}
+
+// Number Data struct definition.
+// This struct applies to multiple series of data:
+//
+// - Accountants.
+// See more: https://www.data.gov.gr/datasets/oee_accountants/
+//
+// - Doctors.
+// See more: https://www.data.gov.gr/datasets/minhealth_doctors/
+//
+// - Dendists.
+// See more: https://www.data.gov.gr/datasets/minhealth_dentists/
+//
+// - Energy Inspector numbers.
+// See more: https://www.data.gov.gr/datasets/minenv_inspectors/
+//
+// - Lawyer numbers.
+// See more: https://www.data.gov.gr/datasets/minjust_lawyers/
+//
+// - Law firm numbers.
+// See more: https://www.data.gov.gr/datasets/minjust_law_firms/
+//
+// - Pharmacy numbers.
+// See more: https://data.gov.gr/datasets/minhealth_pharmacies/
+//
+// - Pharmacist numbers.
+// See more: https://data.gov.gr/datasets/minhealth_pharmacists/
+//
+// - Realtors.
+// See more: https://www.data.gov.gr/datasets/mindev_realtors/
+//
+// - Tourist Agencies.
+// See more: https://www.data.gov.gr/datasets/mintour_agencies/
+type NumberData struct {
+	Year     int    `json:"year,omitempty"`
+	Quarter  string `json:"quarter,omitempty"`
+	Active   int    `json:"active,omitempty"`
+	Entrants int    `json:"entrants,omitempty"`
+	Exits    int    `json:"exits,omitempty"`
 }
 
 // Student School Data.
@@ -186,6 +199,7 @@ func structToJSONString(t interface{}) string {
 func (i *NumberData) String() string                     { return structToJSONString(i) }
 func (i *AcademicProfessorData) String() string          { return structToJSONString(i) }
 func (i *AuditorData) String() string                    { return structToJSONString(i) }
+func (i *CasinoTicketData) String() string               { return structToJSONString(i) }
 func (i *CrimeStatData) String() string                  { return structToJSONString(i) }
 func (i *EudoxusApplicationData) String() string         { return structToJSONString(i) }
 func (i *FinancialCrimeData) String() string             { return structToJSONString(i) }

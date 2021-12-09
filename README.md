@@ -62,7 +62,7 @@ The current version of the GoDataGovGr clients supports data set of the data.gov
 * [Crime and Justice](https://data.gov.gr/search/?topic=crime)
   * [x] [Traffic Accidents](https://www.data.gov.gr/datasets/mcp_traffic_accidents/)
   * [x] [Traffic Violations](https://www.data.gov.gr/datasets/mcp_traffic_violations/)
-  * [ ] [Hellenic Coast Guard (HCG) Incidents](https://www.data.gov.gr/datasets/hcg_incidents/)
+  * [x] [Hellenic Coast Guard (HCG) Incidents](https://www.data.gov.gr/datasets/hcg_incidents/)
   * [x] [Crimes](https://www.data.gov.gr/datasets/mcp_crime/)
   * [x] [Financial Crimes](https://www.data.gov.gr/datasets/mcp_financial_crimes/)
   * [x] [Law Firms](https://www.data.gov.gr/datasets/minjust_law_firms/)

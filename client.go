@@ -1,7 +1,6 @@
 package godatagovgr
 
 import (
-	"errors"
 	"fmt"
 	"net/http"
 	"time"
@@ -78,10 +77,10 @@ func (d *DataGovGrClient) GetData(queryParams, data interface{}, url string) err
 		SetError(&errorResponse).
 		Get(url)
 	if err != nil {
-		return errors.New(fmt.Sprintf("Could not retrieve requested data: %s", err))
+		return fmt.Errorf("Could not retrieve requested data: %s", err)
 	} else if resp.StatusCode() != http.StatusOK {
-		return errors.New(fmt.Sprintf("Request failed with status code [%d]: `%s`",
-			resp.StatusCode(), errorResponse["error"].(string)))
+		return fmt.Errorf("Request failed with status code [%d]: `%s`",
+			resp.StatusCode(), errorResponse["error"].(string))
 	}
 	return nil
 }
@@ -96,10 +95,9 @@ func (d *DataGovGrClient) GetNumbers(url string) (*[]NumberData, error) {
 		SetError(&errorResponse).
 		Get(url)
 	if err != nil {
-		return nil, errors.New(fmt.Sprintf("Could not retrieve numbers: %s", err))
+		return nil, fmt.Errorf("Could not retrieve numbers: %s", err)
 	} else if resp.StatusCode() != http.StatusOK {
-		return nil, errors.New(fmt.Sprintf(
-			"Request failed with status code [%d].", resp.StatusCode()))
+		return nil, fmt.Errorf("Request failed with status code [%d].", resp.StatusCode())
 	}
 	return &numbers, nil
 }

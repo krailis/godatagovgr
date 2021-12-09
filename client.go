@@ -212,12 +212,24 @@ func (d *DataGovGrClient) GetInternetTraffic(
 	return internetTrafficData, nil
 }
 
+// GetInternships retrieves the Internship data from data.gov.gr.
+func (d *DataGovGrClient) GetInternships() (*[]InternshipData, error) {
+	// Define empty internship data.
+	internshipData := &[]InternshipData{}
+	// Get HCG incident data.
+	err := d.GetData(nil, internshipData, URL_INTERNSHIPS)
+	if err != nil {
+		return nil, err
+	}
+	return internshipData, nil
+}
+
 // GetHCGIncidents retrieves the Hellenic Coast Guard Incident data from data.gov.gr.
 func (d *DataGovGrClient) GetHCGIncidents() (*[]HellenicCoastGuardIncidentData, error) {
 	// Define empty HCG incident data.
 	HCGIncidentData := &[]HellenicCoastGuardIncidentData{}
 	// Get HCG incident data.
-	err := d.GetData(nil, HCGIncidentData, URL_TRAFFIC_ACCIDENTS)
+	err := d.GetData(nil, HCGIncidentData, URL_HCG_INCIDENTS)
 	if err != nil {
 		return nil, err
 	}
@@ -247,6 +259,18 @@ func (d *DataGovGrClient) GetPharmacists() (*[]NumberData, error) {
 // GetRealtors retrieves the realtor numbers from data.gov.gr.
 func (d *DataGovGrClient) GetRealtors() (*[]NumberData, error) {
 	return d.GetNumbers(URL_REALTORS)
+}
+
+// GetStudentSchools retrieves the Student School data from data.gov.gr.
+func (d *DataGovGrClient) GetStudentSchools() (*[]StudentSchoolData, error) {
+	// Define empty traffic accident data.
+	studentSchoolData := &[]StudentSchoolData{}
+	// Get traffic accident data.
+	err := d.GetData(nil, studentSchoolData, URL_STUDENT_SCHOOLS)
+	if err != nil {
+		return nil, err
+	}
+	return studentSchoolData, nil
 }
 
 // GetTouristAgencies retrieves the tourist agency numbers from data.gov.gr.

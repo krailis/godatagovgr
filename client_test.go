@@ -136,6 +136,15 @@ func TestGetInternetTrafficByDates(t *testing.T) {
 	}
 }
 
+// TestGetInternships tests the retrieval of internship data.
+func TestGetInternships(t *testing.T) {
+	// Perform a request without query params.
+	_, err := dataGovGrClient.GetInternships()
+	if err != nil {
+		t.Fatalf("Expected no error, got %v.", err)
+	}
+}
+
 // TestLawyerNumbers tests the retrieval of the lawyer numbers.
 func TestLawyerNumbers(t *testing.T) {
 	// Perform a request without query params.
@@ -181,8 +190,17 @@ func TestGetRealtors(t *testing.T) {
 	}
 }
 
+// TestGetStudentSchools tests the retrieval of the student school numbers.
+func TestGetStudentSchools(t *testing.T) {
+	// Perform a request without query params.
+	_, err := dataGovGrClient.GetStudentSchools()
+	if err != nil {
+		t.Errorf("Expected no error, got %v.", err)
+	}
+}
+
 // TestGetTouristAgencies tests the retrieval of the tourist agency numbers.
-func TestTouristAgencies(t *testing.T) {
+func TestGetTouristAgencies(t *testing.T) {
 	// Perform a request without query params.
 	_, err := dataGovGrClient.GetTouristAgencies()
 	if err != nil {

@@ -1,5 +1,6 @@
 package electricityconsumption
 
+// Electricity Consumption Areas.
 const (
 	CRETE            = "ΚΡΗΤΗ"
 	RHODES           = "ΡΟΔΟΣ"

@@ -1,5 +1,6 @@
 package energybalance
 
+// Types of Energy.
 const (
 	HYDROELECTRIC = "ΥΔΡΟΗΛΕΚΤΡΙΚΑ"
 	GAS           = "ΑΕΡΙΟ"

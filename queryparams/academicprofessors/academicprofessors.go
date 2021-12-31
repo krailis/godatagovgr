@@ -1,5 +1,6 @@
 package academicprofessors
 
+// Institutions.
 const (
 	NATIONAL_AND_KAPODISTRIAN_UNIVERSITY_OF_ATHENS = "ΕΘΝΙΚΟ & ΚΑΠΟΔΙΣΤΡΙΑΚΟ ΠΑΝΕΠΙΣΤΗΜΙΟ ΑΘΗΝΩΝ"
 	ARISTOTLE_UNIVERSITY_OF_THESSALONIKI           = "ΑΡΙΣΤΟΤΕΛΕΙΟ ΠΑΝΕΠΙΣΤΗΜΙΟ ΘΕΣΣΑΛΟΝΙΚΗΣ"

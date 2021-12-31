@@ -1,5 +1,6 @@
 package financialcrime
 
+// Types of Financial Crimes.
 const (
 	ALCOHOL_CONTRABAND                          = "Λαθρεμπόριο αλκοόλ"
 	BRIBERY_AND_CORRUPTION_AGAINST_THE_STATE_EU = "Απιστία, δωροδοκία & διαφθορά σε βάρος Δημοσίου/ΕΕ"

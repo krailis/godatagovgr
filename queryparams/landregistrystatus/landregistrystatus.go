@@ -1,5 +1,6 @@
 package landregistrystatus
 
+// Land Registry Statuses.
 const (
 	OPERATING            = "ΛΕΙΤΟΥΡΓΙΑ"
 	POSTED               = "ΑΝΑΡΤΗΣΗ"

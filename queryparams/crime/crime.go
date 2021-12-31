@@ -1,5 +1,6 @@
 package crime
 
+// Types of Crimes.
 const (
 	MANSLAUGHTERS                     = "ΑΝΘΡΩΠΟΚΤΟΝΙΕΣ"
 	FRAUDS                            = "ΑΠΑΤΕΣ"

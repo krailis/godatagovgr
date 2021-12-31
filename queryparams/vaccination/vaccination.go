@@ -1,5 +1,6 @@
 package vaccination
 
+// Vaccination Areas.
 const (
 	ACHAIA            = "ΑΧΑΪΑΣ"
 	AETOLIA_ACARNANIA = "ΑΙΤΩΛΟΑΚΑΡΝΑΝΙΑΣ"

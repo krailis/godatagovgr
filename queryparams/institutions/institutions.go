@@ -1,6 +1,6 @@
-package academicprofessors
+package institutions
 
-// Institutions.
+// Institutions for Academic Professors, Eudoxus Applications and Internships.
 const (
 	NATIONAL_AND_KAPODISTRIAN_UNIVERSITY_OF_ATHENS = "ΕΘΝΙΚΟ & ΚΑΠΟΔΙΣΤΡΙΑΚΟ ΠΑΝΕΠΙΣΤΗΜΙΟ ΑΘΗΝΩΝ"
 	ARISTOTLE_UNIVERSITY_OF_THESSALONIKI           = "ΑΡΙΣΤΟΤΕΛΕΙΟ ΠΑΝΕΠΙΣΤΗΜΙΟ ΘΕΣΣΑΛΟΝΙΚΗΣ"
@@ -34,14 +34,15 @@ const (
 	ECCLESIASTICAL_ACADEMY_OF_IOANNINA          = "ΑΝΩΤΑΤΗ ΕΚΚΛΗΣΙΑΣΤΙΚΗ ΑΚΑΔΗΜΙΑ ΒΕΛΛΑΣ ΙΩΑΝΝΙΝΩΝ"
 	PATRIARCHAL_ECCLESIASTICAL_ACADEMY_OF_CRETE = "ΠΑΤΡΙΑΡΧΙΚΗ ΑΝΩΤΑΤΗ ΕΚΚΛΗΣΙΑΣΤΙΚΗ ΑΚΑΔΗΜΙΑ ΚΡΗΤΗΣ"
 
-	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_THESSALONIKI      = "ΑΛΕΞΑΝΔΡΕΙΟ ΤΕΙ ΘΕΣΣΑΛΟΝΙΚΗΣ"
-	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_CENTRAL_MACEDONIA = "ΤΕΙ ΚΕΝΤΡΙΚΗΣ ΜΑΚΕΔΟΝΙΑΣ"
-	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_WEST_MACEDONIA    = "ΤΕΙ ΔΥΤΙΚΗΣ ΜΑΚΕΔΟΝΙΑΣ"
-	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_WEST_GREECE       = "ΤΕΙ ΔΥΤΙΚΗΣ ΕΛΛΑΔΑΣ"
-	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_THESSALY          = "ΤΕΙ ΘΕΣΣΑΛΙΑΣ"
-	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_CRETE             = "ΤΕΙ ΚΡΗΤΗΣ"
-	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_PELOPONNISSOS     = "ΤΕΙ ΠΕΛΟΠΟΝΝΗΣΟΥ"
-	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_STEREA_ELLADA     = "ΤΕΙ ΣΤΕΡΕΑΣ ΕΛΛΑΔΑΣ"
-	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_IPIROS            = "ΤΕΙ ΗΠΕΙΡΟΥ"
-	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_IONIAN_ISLANDS    = "ΤΕΙ ΙΟΝΙΩΝ ΝΗΣΩΝ"
+	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_THESSALONIKI              = "ΑΛΕΞΑΝΔΡΕΙΟ ΤΕΙ ΘΕΣΣΑΛΟΝΙΚΗΣ"
+	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_CENTRAL_MACEDONIA         = "ΤΕΙ ΚΕΝΤΡΙΚΗΣ ΜΑΚΕΔΟΝΙΑΣ"
+	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_WEST_MACEDONIA            = "ΤΕΙ ΔΥΤΙΚΗΣ ΜΑΚΕΔΟΝΙΑΣ"
+	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_WEST_GREECE               = "ΤΕΙ ΔΥΤΙΚΗΣ ΕΛΛΑΔΑΣ"
+	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_THESSALY                  = "ΤΕΙ ΘΕΣΣΑΛΙΑΣ"
+	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_CRETE                     = "ΤΕΙ ΚΡΗΤΗΣ"
+	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_PELOPONNISSOS             = "ΤΕΙ ΠΕΛΟΠΟΝΝΗΣΟΥ"
+	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_STEREA_ELLADA             = "ΤΕΙ ΣΤΕΡΕΑΣ ΕΛΛΑΔΑΣ"
+	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_IPIROS                    = "ΤΕΙ ΗΠΕΙΡΟΥ"
+	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_IONIAN_ISLANDS            = "ΤΕΙ ΙΟΝΙΩΝ ΝΗΣΩΝ"
+	TECHNOLOGICAL_EDUCATIONAL_INSTITUTE_OF_EAST_MACEDONIA_AND_THRACE = "ΤΕΙ ΑΝΑΤΟΛΙΚΗΣ ΜΑΚΕΔΟΝΙΑΣ ΚΑΙ ΘΡΑΚΗΣ"
 )

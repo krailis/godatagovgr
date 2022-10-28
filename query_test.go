@@ -46,18 +46,18 @@ func TestFormatQueryParamsVaccination(t *testing.T) {
 	)
 }
 
-func TestFormatQueryParamsInternetTraffic(t *testing.T) {
+func TestFormatQueryParamsDate(t *testing.T) {
 	// New assert.
 	assert := assert.New(t)
 
-	// Test for empty internet traffic query params.
-	queryMap, err := FormatQueryParams(InternetTrafficQueryParams{})
+	// Test for empty date query params.
+	queryMap, err := FormatQueryParams(DateQueryParams{})
 	assert.NoError(err, "Unexpected error.")
 	assert.Equal(queryMap, map[string]string{},
 		fmt.Sprintf("Expected an empty map, got %v.", queryMap))
 
-	// Test for internet traffic query params.
-	queryMap, err = FormatQueryParams(InternetTrafficQueryParams{
+	// Test for date query params.
+	queryMap, err = FormatQueryParams(DateQueryParams{
 		DateFrom: "2021-01-01",
 		DateTo:   "2021-09-01",
 	})

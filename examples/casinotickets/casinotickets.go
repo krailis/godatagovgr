@@ -1,24 +1,25 @@
 package main
 
 import (
+	"fmt"
 	"log"
-	"os"
 
 	"github.com/krailis/godatagovgr"
 )
 
 func main() {
-	// Retrieve API token from the environment.
-	apiToken, ok := os.LookupEnv("DATAGOVGR_API_TOKEN")
-	if !ok || len(apiToken) == 0 {
-		log.Panic("The API token for data.gov.gr has not been properly set.")
-	}
+	// Get API token.
+	apiToken := godatagovgr.GetAPIToken()
 
 	// Create client.
 	client := godatagovgr.NewClient(godatagovgr.NewDefaultConfig(apiToken))
 
 	// Perform request.
-	casinoTickets, err := client.GetCasinoTickets()
+	casinoTickets, err := client.GetCasinoTickets(
+		&godatagovgr.YearQueryParams{
+			Year: fmt.Sprint(2016),
+		},
+	)
 	if err != nil {
 		log.Panicf("An error occurred while fetching casino ticker data: %s", err)
 	}

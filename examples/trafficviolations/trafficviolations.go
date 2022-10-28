@@ -2,23 +2,25 @@ package main
 
 import (
 	"log"
-	"os"
 
 	"github.com/krailis/godatagovgr"
+	"github.com/krailis/godatagovgr/queryparams/trafficviolations"
 )
 
 func main() {
-	// Retrieve API token from the environment.
-	apiToken, ok := os.LookupEnv("DATAGOVGR_API_TOKEN")
-	if !ok || len(apiToken) == 0 {
-		log.Panic("The API token for data.gov.gr has not been properly set.")
-	}
+	// Get API token.
+	apiToken := godatagovgr.GetAPIToken()
 
 	// Create client.
 	client := godatagovgr.NewClient(godatagovgr.NewDefaultConfig(apiToken))
 
 	// Perform request.
-	trafficViolations, err := client.GetTrafficViolations()
+	trafficViolations, err := client.GetTrafficViolations(
+		&godatagovgr.TrafficViolationQueryParams{
+			Year:      "2018",
+			Violation: trafficviolations.DRIVING_LICENSE_SUSPENSION,
+		},
+	)
 	if err != nil {
 		log.Panicf("An error occurred while fetching traffic violation data: %s", err)
 	}

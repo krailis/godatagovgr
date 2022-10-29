@@ -18,18 +18,20 @@ type DataGovGrClient struct {
 
 // DataGovGrConfig struct representation.
 type DataGovGrConfig struct {
-	apiToken         string
-	retryCount       int
-	retryWaitTime    int
-	retryMaxWaitTime int
-	timeout          time.Duration
+	apiToken                     string
+	retryCount                   int
+	retryWaitTime                int
+	retryMaxWaitTime             int
+	retryTooManyRequestsWaitTime int
+	timeout                      time.Duration
 }
 
 const (
-	_retryCount       = 3
-	_retryWaitTime    = 5
-	_retryMaxWaitTime = 15
-	_timeout          = time.Second * 20
+	_retryCount                   = 3
+	_retryWaitTime                = 5
+	_retryTooManyRequestsWaitTime = 90
+	_retryMaxWaitTime             = 120
+	_timeout                      = time.Second * 20
 )
 
 // NewClient creates and returns an new DataGovGr client.
@@ -43,8 +45,18 @@ func NewClient(config *DataGovGrConfig) *DataGovGrClient {
 			SetRetryCount(config.retryCount).
 			SetRetryWaitTime(time.Duration(config.retryWaitTime) * time.Second).
 			SetRetryMaxWaitTime(time.Duration(config.retryMaxWaitTime) * time.Second).
-			SetTimeout(config.timeout).
-			SetRetryAfter(nil),
+			SetRetryAfter(func(client *resty.Client, resp *resty.Response) (time.Duration, error) {
+				if resp.StatusCode() == http.StatusTooManyRequests {
+					return time.Duration(config.retryTooManyRequestsWaitTime) * time.Second, nil
+				}
+				return 0, nil
+			}).
+			AddRetryCondition(
+				func(resp *resty.Response, err error) bool {
+					return resp.StatusCode() == http.StatusTooManyRequests
+				},
+			).
+			SetTimeout(config.timeout),
 	}
 }
 
@@ -55,11 +67,12 @@ func NewClient(config *DataGovGrConfig) *DataGovGrClient {
 // retry max wait time of five (5) secs, and a timeout of ten (10) secs.
 func NewDefaultConfig(apiToken string) *DataGovGrConfig {
 	return &DataGovGrConfig{
-		apiToken:         apiToken,
-		retryCount:       _retryCount,
-		retryWaitTime:    _retryWaitTime,
-		retryMaxWaitTime: _retryMaxWaitTime,
-		timeout:          _timeout,
+		apiToken:                     apiToken,
+		retryCount:                   _retryCount,
+		retryWaitTime:                _retryWaitTime,
+		retryMaxWaitTime:             _retryMaxWaitTime,
+		retryTooManyRequestsWaitTime: _retryTooManyRequestsWaitTime,
+		timeout:                      _timeout,
 	}
 }
 

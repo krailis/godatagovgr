@@ -24,11 +24,12 @@ func TestMain(m *testing.M) {
 	// Initialize client.
 	dataGovGrClient = NewClient(
 		&DataGovGrConfig{
-			apiToken:         apiToken,
-			retryCount:       3,
-			retryWaitTime:    15,
-			retryMaxWaitTime: 60,
-			timeout:          time.Duration(20) * time.Second,
+			apiToken:                     apiToken,
+			retryCount:                   3,
+			retryWaitTime:                15,
+			retryMaxWaitTime:             120,
+			retryTooManyRequestsWaitTime: 90,
+			timeout:                      time.Duration(20) * time.Second,
 		},
 	)
 

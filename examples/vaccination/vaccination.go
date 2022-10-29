@@ -2,17 +2,14 @@ package main
 
 import (
 	"log"
-	"os"
 
 	"github.com/krailis/godatagovgr"
+	"github.com/krailis/godatagovgr/queryparams/vaccination"
 )
 
 func main() {
-	// Retrieve API token from the environment.
-	apiToken, ok := os.LookupEnv("DATAGOVGR_API_TOKEN")
-	if !ok || len(apiToken) == 0 {
-		log.Panic("The API token for data.gov.gr has not been properly set.")
-	}
+	// Get API token.
+	apiToken := godatagovgr.GetAPIToken()
 
 	// Create client.
 	client := godatagovgr.NewClient(godatagovgr.NewDefaultConfig(apiToken))
@@ -22,7 +19,7 @@ func main() {
 		&godatagovgr.VaccinationQueryParams{
 			DateFrom: "2021-01-01",
 			DateTo:   "2021-11-30",
-			Area:     "ΡΕΘΥΜΝΟΥ",
+			Area:     vaccination.RETHIMNO,
 		},
 	)
 	if err != nil {
